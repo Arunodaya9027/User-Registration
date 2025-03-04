@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import org.example.userregistration.dto.AuthUserDTO;
 import org.example.userregistration.dto.LoginDTO;
 import org.example.userregistration.dto.ResponseDTO;
+import org.example.userregistration.exception.UserException;
 import org.example.userregistration.model.AuthUser;
 import org.example.userregistration.service.EmailSenderService;
 import org.example.userregistration.service.IAuthenticationService;
@@ -34,8 +35,8 @@ public class UserRegistrationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ResponseDTO> login(@Valid @RequestBody LoginDTO loginDTO){
-        String result=authenticationService.login(loginDTO);
+    public ResponseEntity<ResponseDTO> login(@Valid @RequestBody LoginDTO loginDTO) throws UserException {
+        String result = authenticationService.login(loginDTO);
         ResponseDTO responseUserDTO=new ResponseDTO("Login successfully!!",result);
         return  new ResponseEntity<>(responseUserDTO,HttpStatus.OK);
     }
