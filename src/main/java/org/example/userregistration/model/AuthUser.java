@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Generated;
 import lombok.NoArgsConstructor;
+import org.example.userregistration.dto.AuthUserDTO;
 
 @Data
 @AllArgsConstructor
@@ -22,4 +23,11 @@ public class AuthUser {
     private String email;
     private String password;
     private String resetToken;
+
+    public AuthUser(AuthUserDTO userDTO) {
+        this.firstName = userDTO.getFirstName();
+        this.lastName = userDTO.getLastName();
+        this.email = userDTO.getEmail();
+        this.password = userDTO.getPassword();
+    }
 }
