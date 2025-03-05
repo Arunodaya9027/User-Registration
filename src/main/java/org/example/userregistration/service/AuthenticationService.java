@@ -45,7 +45,7 @@ public class AuthenticationService implements  IAuthenticationService {
     @Override
     public String login(LoginDTO loginDTO) throws UserException {
         Optional<AuthUser> user= Optional.ofNullable(authUserRepository.findByEmail(loginDTO.getEmail()));
-        if (user.isPresent() && user.get().getPassword().equals(loginDTO.getPassword()) ){
+        if (user.isPresent() && user.get().getPassword().equals(loginDTO.getPassword())) {
             emailSenderService.sendEmail(user.get().getEmail(),"Logged in Successfully!", "Hii...."+user.get().getFirstName()+"\n\n You have successfully logged in into Greeting App!");
             return "Congratulations!! You have logged in successfully!";
         } else {

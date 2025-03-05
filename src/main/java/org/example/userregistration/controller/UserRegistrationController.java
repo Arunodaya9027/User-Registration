@@ -27,17 +27,17 @@ public class UserRegistrationController {
     private EmailSenderService emailSenderService;
 
     @PostMapping("/register")
-    public ResponseEntity<ResponseDTO> register(@Valid @RequestBody AuthUserDTO userDTO) throws Exception{
-        System.out.println(7);
+    public ResponseEntity<ResponseDTO> register(@RequestBody AuthUserDTO userDTO) throws Exception{
         AuthUser user=authenticationService.register(userDTO);
-        ResponseDTO responseUserDTO =new ResponseDTO("User details is submitted!",user);
+        ResponseDTO responseUserDTO =new ResponseDTO("User details is submitted!", user);
         return new ResponseEntity<>(responseUserDTO, HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
     public ResponseEntity<ResponseDTO> login(@Valid @RequestBody LoginDTO loginDTO) throws UserException {
+        System.out.println(10);
         String result = authenticationService.login(loginDTO);
-        ResponseDTO responseUserDTO=new ResponseDTO("Login successfully!!",result);
-        return  new ResponseEntity<>(responseUserDTO,HttpStatus.OK);
+        ResponseDTO responseUserDTO=new ResponseDTO("Login successfully!!", result);
+        return new ResponseEntity<>(responseUserDTO,HttpStatus.OK);
     }
 }
