@@ -26,8 +26,9 @@ public class AuthenticationService implements  IAuthenticationService {
     @Override
     public AuthUser register(AuthUserDTO userDTO) throws Exception {
         AuthUser user = new AuthUser(userDTO);
-        System.out.println(user);
         String token = tokenUtil.createToken(user.getUserId());
+        user.setResetToken(token);
+        System.out.println(user);
         authUserRepository.save(user);
         emailSenderService.sendEmail(user.getEmail(),"Welcome to MyHI App", "Hello "
                 + user.getFirstName()

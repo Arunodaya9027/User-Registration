@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
-public class UserRegistrationController {
+public class AuthUserController {
 
     @Autowired
     private IAuthenticationService authenticationService;
@@ -34,7 +34,7 @@ public class UserRegistrationController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<ResponseDTO> login(@Valid @RequestBody LoginDTO loginDTO) throws UserException {
+    public ResponseEntity<ResponseDTO> login(@RequestBody LoginDTO loginDTO) throws UserException {
         System.out.println(10);
         String result = authenticationService.login(loginDTO);
         ResponseDTO responseUserDTO=new ResponseDTO("Login successfully!!", result);

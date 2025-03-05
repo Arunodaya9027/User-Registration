@@ -34,6 +34,6 @@ build/
 
 
 ### DB Files ###
-database.mv.db
-database.trace.db
+.mv.db
+.trace.db
 database
