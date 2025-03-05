@@ -31,8 +31,4 @@ public class AuthUserDTO {
     @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$",
             message = "Password must contain an uppercase letter, a lowercase letter, a number, and a special character")
     private String password;
-
-    public String getEmail() {
-        return email;
-    }
 }
