@@ -27,17 +27,24 @@ public class AuthUserController {
     private EmailSenderService emailSenderService;
 
     @PostMapping("/register")
-    public ResponseEntity<ResponseDTO> register(@RequestBody AuthUserDTO userDTO) throws Exception{
-        AuthUser user=authenticationService.register(userDTO);
-        ResponseDTO responseUserDTO =new ResponseDTO("User details is submitted!", user);
-        return new ResponseEntity<>(responseUserDTO, HttpStatus.CREATED);
+    public ResponseEntity<ResponseDTO> register(@RequestBody AuthUserDTO userDTO) {
+        try {
+            AuthUser user = authenticationService.register(userDTO);
+            ResponseDTO responseUserDTO = new ResponseDTO("User details is submitted!", user);
+            return new ResponseEntity<>(responseUserDTO, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new ResponseDTO("User details is not submitted!", userDTO), HttpStatus.BAD_REQUEST);
+        }
     }
 
     @PostMapping("/login")
     public ResponseEntity<ResponseDTO> login(@RequestBody LoginDTO loginDTO) throws UserException {
-        System.out.println(10);
-        String result = authenticationService.login(loginDTO);
-        ResponseDTO responseUserDTO=new ResponseDTO("Login successfully!!", result);
-        return new ResponseEntity<>(responseUserDTO,HttpStatus.OK);
+        try {
+            String result = authenticationService.login(loginDTO);
+            ResponseDTO responseUserDTO = new ResponseDTO("Login successfully!!", result);
+            return new ResponseEntity<>(responseUserDTO, HttpStatus.OK);
+        } catch (UserException e) {
+            return new ResponseEntity<>(new ResponseDTO("Login failed!!"+e.getMessage(), loginDTO), HttpStatus.BAD_REQUEST);
+        }
     }
 }
